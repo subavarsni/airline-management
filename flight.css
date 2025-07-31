@@ -1,0 +1,159 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: url('fliii.png') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  text-align: center;
+  animation: fadeInBody 1.5s ease;
+}
+
+header {
+  background: rgba(0, 123, 255, 0.9);
+  padding: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  backdrop-filter: blur(10px);
+  animation: slideDown 1s ease-out;
+}
+
+/* Container Animation */
+.container {
+  max-width: 500px;
+  margin: 30px auto;
+  background: #ffffff99;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  color: black;
+  animation: zoomIn 1.2s ease;
+}
+
+.search-container input,
+.search-container button {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+}
+
+.search-container input {
+  background: #f9f9f9;
+}
+
+.search-container button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.search-container button:hover {
+  background-color: #004ea1;
+  transform: scale(1.05);
+}
+
+/* Flight List */
+.flight-list {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.flight {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 15px;
+  margin: 15px auto;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  animation: fadeInUp 0.8s ease both;
+}
+
+.flight img {
+  width: 120px;
+  height: 80px;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+.flight-details {
+  flex-grow: 1;
+}
+
+.flight p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.flight button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.flight button:hover {
+  background-color: darkred;
+  transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeInBody {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  .search-container input {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .search-container button {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .flight {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .flight img {
+    margin-bottom: 10px;
+  }
+}

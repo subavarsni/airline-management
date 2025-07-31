@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flight Booking System</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: url('booking.jpg') no-repeat center  center fixed ;
+      background-size: cover;
+      color: white;
+      text-align: center;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    header {
+      background: rgba(0, 123, 255, 0.9);
+      padding: 15px;
+      font-size: 24px;
+      font-weight: bold;
+      backdrop-filter: blur(10px);
+      animation: slideDown 1s ease;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      color: black;
+      animation: fadeInUp 1s ease;
+    }
+
+    .flight-list, .booking-list {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .flight, .booking {
+      display: flex;
+      align-items: center;
+      background: white;
+      padding: 15px;
+      margin: 10px auto;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      max-width: 500px;
+      justify-content: space-between;
+      animation: fadeIn 0.7s ease;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .flight:hover, .booking:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .flight img {
+      width: 100px;
+      height: 70px;
+      border-radius: 8px;
+      margin-right: 15px;
+    }
+
+    .flight button, .booking button {
+      background-color: green;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s;
+    }
+
+    .flight button:hover, .booking button:hover {
+      background-color: darkgreen;
+      transform: scale(1.05);
+    }
+
+    .cancel-btn {
+      background-color: red;
+    }
+
+    .cancel-btn:hover {
+      background-color: darkred;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>Flight Booking System</header>
+
+  <div class="container">
+    <h2>Available Flights</h2>
+    <div id="flights-list" class="flight-list"></div>
+  </div>
+
+  <div class="container">
+    <h2>My Bookings</h2>
+    <div id="booking-list" class="booking-list"></div>
+  </div>
+
+  <script>
+    const flights = [
+      { flight_id: 101, flight_number: 'AI202', airline: 'Air India', departure: 'Delhi', arrival: 'Mumbai', time: '10:30 AM', price: '8500', date: '2025-03-15', img: 'airindia.jpg' },
+      { flight_id: 102, flight_number: '6E345', airline: 'IndiGo', departure: 'Bangalore', arrival: 'Chennai', time: '2:00 PM', price: '6000', date: '2025-03-16', img: 'indigo.jpg' },
+      { flight_id: 103, flight_number: 'SG567', airline: 'SpiceJet', departure: 'Hyderabad', arrival: 'Kolkata', time: '6:45 PM', price: '7000', date: '2025-03-17', img: 'spicejet.jpg' },
+      { flight_id: 104, flight_number: 'UK789', airline: 'Vistara', departure: 'Pune', arrival: 'Goa', time: '9:15 PM', price: '7500', date: '2025-03-18', img: 'visatara.jpg' }
+    ];
+
+    let bookedFlights = JSON.parse(localStorage.getItem('bookedFlights')) || [];
+
+    function displayFlights() {
+      const flightsList = document.getElementById('flights-list');
+      flightsList.innerHTML = '';
+      flights.forEach(flight => {
+        const flightDiv = document.createElement('div');
+        flightDiv.classList.add('flight');
+        flightDiv.innerHTML = `
+          <img src="${flight.img}" alt="Flight Image">
+          <div class="flight-details">
+              <p><strong>${flight.airline}</strong></p>
+              <p>Flight No: ${flight.flight_number}</p>
+              <p>From: ${flight.departure} → To: ${flight.arrival}</p>
+              <p>Time: ${flight.time} | Date: ${flight.date}</p>
+              <p>Price: ₹${flight.price}</p>
+          </div>
+          <button onclick="bookFlight(${flight.flight_id})">Book</button>
+        `;
+        flightsList.appendChild(flightDiv);
+      });
+    }
+
+    function displayBookings() {
+      const bookingList = document.getElementById('booking-list');
+      bookingList.innerHTML = '';
+      if (bookedFlights.length === 0) {
+        bookingList.innerHTML = '<p>No bookings yet.</p>';
+        return;
+      }
+      bookedFlights.forEach(flight => {
+        const bookingDiv = document.createElement('div');
+        bookingDiv.classList.add('booking');
+        bookingDiv.innerHTML = `
+          <div>
+              <p><strong>${flight.airline}</strong></p>
+              <p>Flight No: ${flight.flight_number}</p>
+              <p>From: ${flight.departure} → To: ${flight.arrival}</p>
+              <p>Time: ${flight.time} | Date: ${flight.date}</p>
+              <p>Price: ₹${flight.price}</p>
+              <p>Status: <strong style="color:green;">Confirmed</strong></p>
+          </div>
+          <button class="cancel-btn" onclick="cancelFlight(${flight.flight_id})">Cancel</button>
+        `;
+        bookingList.appendChild(bookingDiv);
+      });
+    }
+
+    function bookFlight(id) {
+      const flight = flights.find(f => f.flight_id === id);
+      if (!bookedFlights.some(f => f.flight_id === id)) {
+        bookedFlights.push(flight);
+        localStorage.setItem('bookedFlights', JSON.stringify(bookedFlights));
+        alert(`Flight ${flight.flight_number} booked successfully!`);
+        displayBookings();
+      } else {
+        alert('You have already booked this flight.');
+      }
+    }
+
+    function cancelFlight(id) {
+      bookedFlights = bookedFlights.filter(f => f.flight_id !== id);
+      localStorage.setItem('bookedFlights', JSON.stringify(bookedFlights));
+      alert('Flight booking cancelled.');
+      displayBookings();
+    }
+
+    displayFlights();
+    displayBookings();
+  </script>
+
+</body>
+</html>

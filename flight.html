@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Flights</title>
+    <style>
+      
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color:darkslategrey;
+            
+            color: white;
+            text-align: center;
+        }
+
+        header {
+            background: rgba(0, 123, 255, 0.9);
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Search Section */
+        .container {
+            max-width: 500px;
+            margin: 30px auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            color: black;
+        }
+
+        .search-container input, 
+        .search-container button {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+        }
+
+        .search-container input {
+            background: #f9f9f9;
+        }
+
+        .search-container button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .search-container button:hover {
+            background-color: #004ea1;
+        }
+
+        /* Flight List */
+        .flight-list {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .flight {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            margin: 15px auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .flight:hover {
+            transform: scale(1.05);
+        }
+
+        .flight img {
+            width: 120px;
+            height: 80px;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+
+        .flight-details {
+            flex-grow: 1;
+        }
+
+        .flight p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .flight button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .flight button:hover {
+            background-color: darkred;
+        }
+
+  
+        @media (max-width: 600px) {
+            .container {
+                max-width: 90%;
+                padding: 15px;
+            }
+
+            .search-container input {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .search-container button {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .flight {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .flight img {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>Available Flights</header>
+
+    <div class="container">
+        <div class="search-container">
+            <input type="text" id="from" placeholder="From">
+            <input type="text" id="to" placeholder="To">
+            <input type="date" id="departure-date">
+            <button onclick="searchFlights()">Search Flights</button>
+        </div>
+
+        <div id="flights-list" class="flight-list"></div>
+    </div>
+
+    <script>
+        function searchFlights() {
+            const from = document.getElementById('from').value;
+            const to = document.getElementById('to').value;
+            const departureDate = document.getElementById('departure-date').value;
+
+            if (!from || !to || !departureDate) {
+                alert('Please fill in all fields to search for flights.');
+                return;
+            }
+
+            const flightsList = document.getElementById('flights-list');
+            flightsList.innerHTML = '';  
+
+            const flights = [
+    { 
+        flight_id: 101, 
+        flight_number: 'AI202', 
+        airline: 'Air India', 
+        departure: 'Delhi', 
+        arrival: 'Mumbai', 
+        time: '10:30 AM', 
+        price: '8500', 
+        date: '2025-03-16', 
+        img: 'airindia.jpg' 
+    },
+    { 
+        flight_id: 102, 
+        flight_number: '6E345', 
+        airline: 'IndiGo', 
+        departure: 'Bangalore', 
+        arrival: 'Chennai', 
+        time: '2:00 PM', 
+        price: '6000', 
+        date: '2025-03-15', 
+        img: 'indigo.jpg' 
+    },
+    { 
+        flight_id: 103, 
+        flight_number: 'SG567', 
+        airline: 'SpiceJet', 
+        departure: 'Hyderabad', 
+        arrival: 'Kolkata', 
+        time: '6:45 PM', 
+        price: '5000', 
+        date: '2025-02-28', 
+        img: 'spicejet.jpg' 
+    },
+    { 
+        flight_id: 104, 
+        flight_number: 'UK789', 
+        airline: 'Vistara', 
+        departure: 'Pune', 
+        arrival: 'Goa', 
+        time: '9:15 PM', 
+        price: '7500', 
+        date: '2025-03-18', 
+        img: 'visatara.jpg' 
+    }
+];
+
+
+
+            flights.forEach(flight => {
+                const flightDiv = document.createElement('div');
+                flightDiv.classList.add('flight');
+                flightDiv.innerHTML = `
+                    <img src="${flight.img}" alt="Flight Image">
+                    <div class="flight-details">
+                        <p><strong>Flight_id:</strong> ${flight.flight_id}</p>
+                        <p><strong>Flight_number:</strong> ${flight.flight_number}</p>
+                        <p><strong>Departure:</strong> ${flight.departure}</p>
+                        <p><strong>Arriaval:</strong> ${flight.arrival}</p>
+                        <p><strong>Price:</strong> ${flight.price}</p>
+                        <p><strong>Date:</strong> ${flight.date}</p>
+
+                    </div>
+                    
+                `;
+                flightsList.appendChild(flightDiv);
+            });
+        }
+
+        function cancelFlight(id) {
+            alert(`Flight ID ${id} has been canceled.`);
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlyHigh Airlines | Book Seamless & Safe Flights</title>
+
+  <!-- ✅ SEO Meta Tags -->
+  <meta name="description" content="Book affordable, safe, and seamless flights with FlyHigh Airlines. Your journey to top destinations begins here!" />
+  <meta name="keywords" content="airline booking, cheap flights, FlyHigh Airlines, travel deals, book tickets online" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- ✅ Meta Ads / Open Graph -->
+  <meta property="og:title" content="FlyHigh Airlines | Book Flights & Save Big!" />
+  <meta property="og:description" content="Grab 10% OFF on your first flight booking. Book now and travel smart!" />
+  <meta property="og:image" content="airplane_banner.jpg" />
+  <meta property="og:url" content="https://yourwebsite.com" />
+  <meta property="og:type" content="website" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: url('1111.jpg') no-repeat   ;
+      background-size: cover;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    nav {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 15px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 20px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-around;
+      padding: 60px 20px;
+      text-align: left;
+      animation: fadeIn 2s ease-in;
+    }
+
+    .window {
+      background: url('background1.jpg') no-repeat center center;
+      background-size: cover;
+      width: 300px;
+      height: 400px;
+      border-radius: 100px;
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .window-text {
+      position: absolute;
+      top: 20%;
+      left: 25%;
+      width: 80%;
+      color: #000;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .window-text a {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 8px 16px;
+      background-color: #007BFF;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .text-box {
+      max-width: 500px;
+      animation: slideUp 1.5s ease-in-out;
+    }
+
+    .text-box h1 {
+      font-size: 36px;
+      color: #ffe600;
+      margin-bottom: 10px;
+      animation: fadeInDown 1.5s ease;
+    }
+
+    .text-box h2 {
+      font-size: 24px;
+      color: #ffffff;
+      margin-bottom: 10px;
+      animation: fadeInRight 1.8s ease;
+    }
+
+    .text-box h3 {
+      font-size: 16px;
+      color: #f0f0f0;
+      font-weight: normal;
+      animation: fadeInUp 2s ease;
+    }
+
+    .cta-buttons {
+      margin-top: 30px;
+      animation: fadeIn 2.5s ease;
+    }
+
+    .btn {
+      background-color: #ff5722;
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 8px;
+      margin: 10px;
+      display: inline-block;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #e64a19;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+
+    @keyframes fadeInDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeInRight {
+      from { transform: translateX(50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .window {
+        margin-bottom: 30px;
+      }
+
+      nav a {
+        margin: 10px;
+        display: inline-block;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="#">Home</a>
+    <a href="flight.html">Flights</a>
+    <a href="booking.html">Bookings</a>
+    <a href="promo.html">Offers</a>
+    
+  </nav>
+
+
+  <div class="hero">
+    <!-- Left Side -->
+    <div class="window">
+      <div class="window-text">
+        Experience seamless <br> and unforgettable <br> travel with comfort <br> and safety!
+        <br><a href="flight.html">Get Started</a>
+      </div>
+    </div>
+
+    <!-- Right Side -->
+    <div class="text-box">
+      <h1>Welcome to FlyHigh Airlines</h1>
+      <h2>Your Journey Begins Here</h2>
+      <h3>Book your flight to amazing destinations around the world.</h3>
+      <div class="cta-buttons">
+        <a href="flight.html" class="btn">Search Flights</a>
+        <a href="booking.html" class="btn">View Bookings</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
